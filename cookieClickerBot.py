@@ -1,5 +1,5 @@
 from selenium import webdriver
-import time
+from time import sleep
 
 PATH = r"C:\Program Files (x86)\chromedriver.exe"
 URL = r"https://orteil.dashnet.org/cookieclicker/"
@@ -9,7 +9,7 @@ class CookieClickerBot:
         self.driver = webdriver.Chrome(PATH)
         self.driver.get(URL)
         # self.driver.implicitly_wait(5)
-        time.sleep(5)
+        sleep(5)
 
         self.clickCookie = lambda times: [self.driver.find_element_by_id('bigCookie').click() for i in range(times)]
 
