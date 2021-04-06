@@ -15,16 +15,18 @@ class CookieClickerBot:
     def clickFirstUpgrade(self):
         try:
             self.driver.find_element_by_id('upgrade0').click()
+            self.driver.find_element_by_id('upgrade1').click()
+            self.driver.find_element_by_id('upgrade2').click()
         except:
             print('clickFirstUpgrade exception')
 
     def clickBuildings(self):
         buildings = self.driver.find_elements_by_css_selector('.product.unlocked.enabled')
-        [[building.click() for i in range(5)] for building in buildings[::-1]]
+        [[building.click() for i in range(10)] for building in buildings[::-1]]
 
     def main(self):
         while True:
-            self.clickCookie(200)
+            self.clickCookie(3000)
             self.clickFirstUpgrade()
             self.clickBuildings()
 
