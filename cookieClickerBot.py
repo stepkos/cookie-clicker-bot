@@ -13,17 +13,21 @@ class CookieClickerBot:
         self.clickCookie = lambda times: [self.cookie.click() for i in range(times)]
         self.main()
 
+    def clickFirstUpgrade(self):
+        try:
+            self.driver.find_element_by_id('upgrade0').click()
+        except:
+            print('clickFirstUpgrade exception')
+
+    def clickBuildings(self):
+        buildings = self.driver.find_elements_by_css_selector('.product.unlocked.enabled')
+        [[building.click() for i in range(5)] for building in buildings[::-1]]
+
     def main(self):
         while True:
-            self.clickCookie(1000)
-
-            buildings = self.driver.find_elements_by_css_selector('.product.unlocked.enabled')
-            [[building.click() for i in range(5)] for building in buildings[::-1]]
-
-            # upgrades = self.driver.find_elements_by_css_selector('.crate.upgrade.enabled')
-            # if upgrades:
-                # upgrades[-1].click()
-            # [upgrade.click() for upgrade in upgrades[::-1]]
+            self.clickCookie(200)
+            self.clickFirstUpgrade()
+            self.clickBuildings()
 
 
 if __name__ == '__main__':
