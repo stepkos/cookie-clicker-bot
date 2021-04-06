@@ -10,19 +10,24 @@ class CookieClickerBot:
         self.driver.get(URL)
         self.driver.implicitly_wait(5)
         self.clickCookie = lambda times: [self.driver.find_element_by_id('bigCookie').click() for i in range(times)]
+
+        input('Press enter to start ')
         self.main()
 
     def clickFirstUpgrade(self):
         try:
-            self.driver.find_element_by_id('upgrade0').click()
-            self.driver.find_element_by_id('upgrade1').click()
             self.driver.find_element_by_id('upgrade2').click()
+            self.driver.find_element_by_id('upgrade1').click()
+            self.driver.find_element_by_id('upgrade0').click()
         except:
             print('clickFirstUpgrade exception')
 
     def clickBuildings(self):
-        buildings = self.driver.find_elements_by_css_selector('.product.unlocked.enabled')
-        [[building.click() for i in range(10)] for building in buildings[::-1]]
+        try:
+            buildings = self.driver.find_elements_by_css_selector('.product.unlocked.enabled')
+            [[building.click() for i in range(10)] for building in buildings[::-1]]
+        except:
+            print('clickBuildings exception')
 
     def main(self):
         while True:
