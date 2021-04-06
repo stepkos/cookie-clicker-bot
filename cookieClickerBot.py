@@ -1,5 +1,5 @@
 from selenium import webdriver
-# import time
+import time
 
 PATH = r"C:\Program Files (x86)\chromedriver.exe"
 URL = r"https://orteil.dashnet.org/cookieclicker/"
@@ -8,13 +8,21 @@ class CookieClickerBot:
     def __init__(self):
         self.driver = webdriver.Chrome(PATH)
         self.driver.get(URL)
-        self.driver.implicitly_wait(5)
+        # self.driver.implicitly_wait(5)
+        time.sleep(5)
+
         self.clickCookie = lambda times: [self.driver.find_element_by_id('bigCookie').click() for i in range(times)]
 
         input('Press enter to start ')
         self.main()
 
-    def clickFirstUpgrade(self):
+    def importSave(self):
+        pass
+
+    def exportSave(self):
+        pass
+
+    def clickUpgrades(self):
         try:
             self.driver.find_element_by_id('upgrade2').click()
             self.driver.find_element_by_id('upgrade1').click()
@@ -32,7 +40,7 @@ class CookieClickerBot:
     def main(self):
         while True:
             self.clickCookie(3000)
-            self.clickFirstUpgrade()
+            self.clickUpgrades()
             self.clickBuildings()
 
 
