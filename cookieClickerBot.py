@@ -87,10 +87,11 @@ class CookieClickerBot:
     def main(self):
         CookieClickerBot.message('CookieClickerBot is starting!')
         while True:
-            self.clickCookie(self.config['clickBeforeBuy'])
+            for _ in range(self.config['seriesBeforeBuy']):
+                self.clickCookie(self.config['clickBeforeSave'])
+                self.exportSave()
             self.clickUpgrades()
             self.clickBuildings()
-            self.exportSave()
 
 
 
