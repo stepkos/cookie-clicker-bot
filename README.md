@@ -2,6 +2,12 @@
 It's a bot to play in cookie clicker (https://orteil.dashnet.org/cookieclicker/)
 
 ## How to run?
+### You can use finished build!
+```
+build/
+```
+
+### Or take a look on my code!
 * Install Python
 * Install Selenium
 * Download driver (recomended "chromedriver")
@@ -15,8 +21,8 @@ config.json
 {
     "DRIVER_PATH": "<path to driver>",
     "SAVE_PATH": "<path to save file>",
-    "URL": "https://orteil.dashnet.org/cookieclicker/",
-    "clickBeforeBuy": "<how many click before buy upgrades and save>"
+    "clickBeforeSave": 1000,
+    "seriesBeforeBuy": 30
 }
 ```
 
@@ -33,3 +39,6 @@ cookieClickerBot.py
 * Automaticly Import Save when you run bot!
 * Print messeges what is happend!
 * JSON config to adjust parameters!
+
+## License
+All rights reserved
