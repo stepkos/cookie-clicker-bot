@@ -1,0 +1,6 @@
+{
+    "DRIVER_PATH": "chromedriver.exe",
+    "SAVE_PATH": "save.txt",
+    "URL": "https://orteil.dashnet.org/cookieclicker/",
+    "clickBeforeBuy": 500
+}
