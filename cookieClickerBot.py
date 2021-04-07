@@ -13,7 +13,7 @@ class CookieClickerBot:
         self.driver.get(URL)
         sleep(5)
 
-        self.clickCookie = lambda times: [self.driver.find_element_by_id('bigCookie').click() for i in range(times)]
+        self.clickCookie = lambda times: [self.driver.find_element_by_id('bigCookie').click() for _ in range(times)]
         self.importSave()
         self.main()
 
@@ -72,7 +72,7 @@ class CookieClickerBot:
     def clickBuildings(self):
         try:
             buildings = self.driver.find_elements_by_css_selector('.product.unlocked.enabled')
-            [[building.click() for i in range(10)] for building in buildings[::-1]]
+            [[building.click() for _ in range(10)] for building in buildings[::-1]]
         except:
             CookieClickerBot.message('clickBuildings method raise an exception')
 
@@ -89,4 +89,4 @@ class CookieClickerBot:
 
 
 if __name__ == '__main__':
-    bot = CookieClickerBot()
+    CookieClickerBot()
