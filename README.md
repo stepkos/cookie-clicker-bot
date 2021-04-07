@@ -23,7 +23,8 @@ cookieClickerBot.py
 
 ## Functionalities
 * Clicking at cookie 50 times per second!
-* Automatic Buy Upgrades
-* Automatic Buy Buildings
-* Automatic Export Save
-* Automatic Import Save when you run bot
+* Automaticly Buy Upgrades!
+* Automaticly Buy Buildings!
+* Automaticly Export Save!
+* Automaticly Import Save when you run bot!
+* Print messeges what is happend!
