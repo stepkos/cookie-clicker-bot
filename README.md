@@ -16,7 +16,7 @@ config.json
     "DRIVER_PATH": "<path to driver>",
     "SAVE_PATH": "<path to save file>",
     "URL": "https://orteil.dashnet.org/cookieclicker/",
-    "clickBeforeBuy": <how many click before buy upgrades and save>
+    "clickBeforeBuy": "<how many click before buy upgrades and save>"
 }
 ```
 
