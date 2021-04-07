@@ -1,21 +1,28 @@
 from selenium.webdriver import Chrome
 from time import sleep
 from datetime import datetime
-
-DRIVER_PATH = r"C:\Program Files (x86)\chromedriver.exe"
-SAVE_PATH = r"save.txt"
-URL = r"https://orteil.dashnet.org/cookieclicker/"
+from json import load as json_load
 
 
 class CookieClickerBot:
     def __init__(self):
-        self.driver = Chrome(DRIVER_PATH)
-        self.driver.get(URL)
+        self.config = self.getConfig()
+        self.driver = Chrome(self.config['DRIVER_PATH'])
+        self.driver.get(self.config['URL'])
         sleep(5)
 
         self.clickCookie = lambda times: [self.driver.find_element_by_id('bigCookie').click() for _ in range(times)]
         self.importSave()
         self.main()
+
+
+    def getConfig(self):
+        try:
+            with open('config.json') as f:
+                return json_load(f)
+        except FileNotFoundError:
+            self.message("FATAL ERROR! - config.json not found")
+            raise FileNotFoundError
 
 
     @staticmethod
@@ -31,7 +38,7 @@ class CookieClickerBot:
 
     def importSave(self):
         try:
-            with open(SAVE_PATH) as f:
+            with open(self.config['SAVE_PATH']) as f:
                 save = f.read()
         except FileNotFoundError:
             CookieClickerBot.message("Incorrect save file path or file doesn't exist")
@@ -52,7 +59,7 @@ class CookieClickerBot:
             CookieClickerBot.message('Save variable (exportSave) is empty')
         else:
             try:
-                with open(SAVE_PATH, 'w') as f:
+                with open(self.config['SAVE_PATH'], 'w') as f:
                     f.write(save)
             except:
                 CookieClickerBot.message("exportSave method raise an exception")
@@ -81,7 +88,7 @@ class CookieClickerBot:
         CookieClickerBot.message('CookieClickerBot is starting!')
         while True:
             for _ in range(3):
-                self.clickCookie(3000)
+                self.clickCookie(300)
                 self.clickUpgrades()
                 self.clickBuildings()
             self.exportSave()
