@@ -6,7 +6,7 @@ from json import load as json_load
 
 class CookieClickerBot:
     def __init__(self):
-        self.config = self.getConfig()
+        self.loadConfig()
         self.driver = Chrome(self.config['DRIVER_PATH'])
         self.driver.get(self.config['URL'])
         sleep(5)
@@ -16,10 +16,10 @@ class CookieClickerBot:
         self.main()
 
 
-    def getConfig(self):
+    def loadConfig(self):
         try:
             with open('config.json') as f:
-                return json_load(f)
+                self.config = json_load(f)
         except FileNotFoundError:
             self.message("FATAL ERROR! - config.json not found")
             raise FileNotFoundError
@@ -87,10 +87,9 @@ class CookieClickerBot:
     def main(self):
         CookieClickerBot.message('CookieClickerBot is starting!')
         while True:
-            for _ in range(3):
-                self.clickCookie(300)
-                self.clickUpgrades()
-                self.clickBuildings()
+            self.clickCookie(self.config['clickBeforeBuy'])
+            self.clickUpgrades()
+            self.clickBuildings()
             self.exportSave()
 
 
