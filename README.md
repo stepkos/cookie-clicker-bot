@@ -6,14 +6,18 @@ It's a bot to play in cookie clicker (https://orteil.dashnet.org/cookieclicker/)
 * Install Selenium
 * Download driver (recomended "chromedriver")
 
-* Paste a path to your driver
-```python
-DRIVER_PATH = r"<path to driver>"
+* Fill the data in config
+```
+config.json
 ```
 
-* Optional you can change save file path
-```python
-SAVE_PATH = r"<path to save file>"
+```json
+{
+    "DRIVER_PATH": "<path to driver>",
+    "SAVE_PATH": "<path to save file>",
+    "URL": "https://orteil.dashnet.org/cookieclicker/",
+    "clickBeforeBuy": <how many click before buy upgrades and save>
+}
 ```
 
 * Run
@@ -28,3 +32,4 @@ cookieClickerBot.py
 * Automaticly Export Save!
 * Automaticly Import Save when you run bot!
 * Print messeges what is happend!
+* JSON config to adjust parameters!
