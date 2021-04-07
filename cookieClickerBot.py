@@ -16,8 +16,6 @@ class CookieClickerBot:
 
         self.clickCookie = lambda times: [self.driver.find_element_by_id('bigCookie').click() for i in range(times)]
         self.importSave()
-
-        CookieClickerBot.message('CookieClickerBot is starting!')
         self.main()
 
 
@@ -61,7 +59,7 @@ class CookieClickerBot:
                 CookieClickerBot.message("exportSave method raise an exception")
             else:
                 CookieClickerBot.message('Save has been exported correctly!')
-                
+
 
     def clickUpgrades(self):
         try:
@@ -81,9 +79,10 @@ class CookieClickerBot:
 
 
     def main(self):
+        CookieClickerBot.message('CookieClickerBot is starting!')
         while True:
             for _ in range(3):
-                self.clickCookie(300)
+                self.clickCookie(3000)
                 self.clickUpgrades()
                 self.clickBuildings()
             self.exportSave()
