@@ -4,22 +4,19 @@ from time import sleep
 from datetime import datetime
 
 DRIVER_PATH = r"C:\Program Files (x86)\chromedriver.exe"
-SAVE_PATH = r""
+SAVE_PATH = r"save.txt"
 URL = r"https://orteil.dashnet.org/cookieclicker/"
 
 
 class CookieClickerBot:
     def __init__(self):
-        # options = Options()
-        # options.page_load_strategy = 'eager'
-        # self.driver = Chrome(DRIVER_PATH, options=options)
         self.driver = Chrome(DRIVER_PATH)
         self.driver.get(URL)
         sleep(5)
 
         self.clickCookie = lambda times: [self.driver.find_element_by_id('bigCookie').click() for i in range(times)]
+        self.importSave()
 
-        input('Press enter to start ')
         CookieClickerBot.message('CookieClickerBot is starting!')
         self.main()
 
@@ -36,12 +33,35 @@ class CookieClickerBot:
 
 
     def importSave(self):
-        pass
+        try:
+            with open(SAVE_PATH) as f:
+                save = f.read()
+        except FileNotFoundError:
+            CookieClickerBot.message("Incorrect save file path or file doesn't exist")
+        else:
+            if not save:
+                CookieClickerBot.message('Save file (importSave) is empty')
+            else:
+                self.driver.execute_script('Game.ImportSaveCode("{}");'.format(save))
+                CookieClickerBot.message('Save has been imported correctly!')
 
 
     def exportSave(self):
-        pass
+        self.driver.execute_script('Game.ExportSave();') # open export window
+        save = self.driver.find_element_by_id('textareaPrompt').get_attribute('value') # get save code
+        self.driver.execute_script('Game.ClosePrompt();') # close export window
 
+        if not save:
+            CookieClickerBot.message('Save variable (exportSave) is empty')
+        else:
+            try:
+                with open(SAVE_PATH, 'w') as f:
+                    f.write(save)
+            except:
+                CookieClickerBot.message("exportSave method raise an exception")
+            else:
+                CookieClickerBot.message('Save has been exported correctly!')
+                
 
     def clickUpgrades(self):
         try:
@@ -62,9 +82,11 @@ class CookieClickerBot:
 
     def main(self):
         while True:
-            self.clickCookie(300)
-            self.clickUpgrades()
-            self.clickBuildings()
+            for _ in range(3):
+                self.clickCookie(300)
+                self.clickUpgrades()
+                self.clickBuildings()
+            self.exportSave()
 
 
 
