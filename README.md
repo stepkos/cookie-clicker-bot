@@ -20,3 +20,10 @@ SAVE_PATH = r"<path to save file>"
 ```
 cookieClickerBot.py
 ```
+
+## Functionalities
+* Clicking at cookie 50 times per second!
+* Automatic Buy Upgrades
+* Automatic Buy Buildings
+* Automatic Export Save
+* Automatic Import Save when you run bot
