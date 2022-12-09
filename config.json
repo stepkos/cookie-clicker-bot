@@ -1,7 +1,0 @@
-{
-    "DRIVER_PATH": "chromedriver_94/chromedriver_win",
-    "SAVE_PATH": "save.txt",
-    "URL": "https://orteil.dashnet.org/cookieclicker/",
-    "clickBeforeSave": 1000,
-    "seriesBeforeBuy": 30
-}
