@@ -15,26 +15,31 @@ class CookieClickerBot:
         self.driver.get(Config.GAME_URL)
         sleep(10)
 
-        self.clickCookie = lambda times: [self.driver.find_element(By.ID, 'bigCookie').click() for _ in range(times)]
-        self.importSave()
+        self.big_cookie = self.driver.find_element(By.ID, 'bigCookie')
+        self.import_save()
         self.main()
+
+    
+    def click_cookie(self, times):
+        for _ in range(times):
+            self.big_cookie.click()
 
 
     @staticmethod
-    def getTime():
+    def get_time():
         now = datetime.now()
         return '{}:{:02d}:{:02d}'.format(now.hour, now.minute, now.second)
 
 
     @staticmethod
     def message(content):
-        print(CookieClickerBot.getTime() + ' - ' + content)
+        print(CookieClickerBot.get_time() + ' - ' + content)
 
 
-    def importSave(self):
+    def import_save(self):
         try:
-            with open(Config.SAVE_PATH) as f:
-                save = f.read()
+            with open(Config.SAVE_PATH) as file:
+                save = file.read()
         except FileNotFoundError:
             CookieClickerBot.message("Incorrect save file path or file doesn't exist")
         else:
@@ -45,7 +50,7 @@ class CookieClickerBot:
                 CookieClickerBot.message('Save has been imported correctly!')
 
 
-    def exportSave(self):
+    def export_save(self):
         self.driver.execute_script('Game.ExportSave();') # open export window
         save = self.driver.find_element(By.ID, 'textareaPrompt').get_attribute('value') # get save code
         self.driver.execute_script('Game.ClosePrompt();') # close export window
@@ -54,15 +59,15 @@ class CookieClickerBot:
             CookieClickerBot.message('Save variable (exportSave) is empty')
         else:
             try:
-                with open(Config.SAVE_PATH, 'w') as f:
-                    f.write(save)
+                with open(Config.SAVE_PATH, 'w') as file:
+                    file.write(save)
             except:
                 CookieClickerBot.message("exportSave method raise an exception")
             else:
                 CookieClickerBot.message('Save has been exported correctly!')
 
 
-    def clickUpgrades(self):
+    def click_upgrades(self):
         try:
             self.driver.find_element(By.ID, 'upgrade2').click()
             self.driver.find_element(By.ID, 'upgrade1').click()
@@ -71,7 +76,7 @@ class CookieClickerBot:
             CookieClickerBot.message('clickUpgrades method raise an exception')
 
 
-    def clickBuildings(self):
+    def click_buildings(self):
         try:
             buildings = self.driver.find_elements(By.CSS_SELECTOR, '.product.unlocked.enabled')
             [[building.click() for _ in range(10)] for building in buildings[::-1]]
@@ -83,10 +88,10 @@ class CookieClickerBot:
         CookieClickerBot.message('CookieClickerBot is starting!')
         while True:
             for _ in range(Config.SERIES_BEFORE_BUY):
-                self.clickCookie(Config.CLICK_BEFORE_SAVE)
-                self.exportSave()
-            self.clickUpgrades()
-            self.clickBuildings()
+                self.click_cookie(Config.CLICK_BEFORE_SAVE)
+                self.export_save()
+            self.click_upgrades()
+            self.click_buildings()
 
 
 
