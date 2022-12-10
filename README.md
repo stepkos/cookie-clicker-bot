@@ -1,7 +1,7 @@
 # CookieClickerBot
 There's a bot to play in cookie clicker [game](https://orteil.dashnet.org/cookieclicker/)
 
-![Screen](https://github.com/stepkos/cookieClickerBot/screen.png)
+![Screen](https://github.com/stepkos/cookieClickerBot/blob/main/screen.png)
 
 
 ## How to run
