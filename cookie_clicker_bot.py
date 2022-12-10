@@ -22,7 +22,7 @@ class CookieClickerBot:
 
     def main(self):
         self.big_cookie = self.driver.find_element(By.ID, 'bigCookie')
-        Logger.success('CookieClickerBot is starting!')
+        Logger.success('CookieClickerBot is starting now!')
         while True:
             for _ in range(Config.CLICKS_BEFORE_PURCHASE // Config.CLICKS_BEFORE_SAVING):
                 self.click_cookie(Config.CLICKS_BEFORE_SAVING)
@@ -34,7 +34,7 @@ class CookieClickerBot:
     def click_cookie(self, times):
         for _ in range(times):
             self.big_cookie.click()
-            self.wait(1/60)
+            self.wait(Config.CLICKS_DELAY)
 
 
     def import_save(self):
@@ -75,6 +75,8 @@ class CookieClickerBot:
             self.driver.find_element(By.ID, 'upgrade0').click()
         except:
             Logger.info('click_upgrades method raise an exception')
+        else:
+            Logger.success('Upgrades was clicked')
 
 
     def click_buildings(self):
@@ -83,6 +85,8 @@ class CookieClickerBot:
             [[building.click() for _ in range(10)] for building in buildings[::-1]]
         except:
             Logger.info('click_buildings method raise an exception')
+        else:
+            Logger.success('Buildings was clicked')
 
     
     def chose_language(self):
@@ -90,6 +94,8 @@ class CookieClickerBot:
             self.driver.find_element(By.ID, 'langSelect-EN').click()
         except TimeoutError:
             Logger.info('Is no language to chose')
+        else:
+            Logger.success('Language was selected')
 
 
 
