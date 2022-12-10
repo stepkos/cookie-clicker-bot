@@ -1,6 +1,8 @@
 from time import sleep
 
 from selenium.webdriver import Chrome as ChromeDriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
 from config import Config
@@ -12,11 +14,23 @@ class CookieClickerBot:
     def __init__(self):
         self.driver = ChromeDriver()
         self.driver.get(Config.GAME_URL)
-        sleep(10)
-
-        self.big_cookie = self.driver.find_element(By.ID, 'bigCookie')
+        self.wait = lambda time: sleep(time)
+        self.wait(4)
+        self.chose_language()
+        self.wait(4)
         self.import_save()
         self.main()
+
+
+    def main(self):
+        self.big_cookie = self.driver.find_element(By.ID, 'bigCookie')
+        Logger.success('CookieClickerBot is starting!')
+        while True:
+            for _ in range(Config.CLICKS_BEFORE_PURCHASE // Config.CLICKS_BEFORE_SAVING):
+                self.click_cookie(Config.CLICKS_BEFORE_SAVING)
+                self.export_save()
+            self.click_upgrades()
+            self.click_buildings()
     
 
     def click_cookie(self, times):
@@ -71,15 +85,12 @@ class CookieClickerBot:
         except:
             Logger.info('click_buildings method raise an exception')
 
-
-    def main(self):
-        Logger.success('CookieClickerBot is starting!')
-        while True:
-            for _ in range(Config.SERIES_BEFORE_BUY):
-                self.click_cookie(Config.CLICK_BEFORE_SAVE)
-                self.export_save()
-            self.click_upgrades()
-            self.click_buildings()
+    
+    def chose_language(self):
+        try:
+            self.driver.find_element(By.ID, 'langSelect-EN').click()
+        except TimeoutError:
+            Logger.info('Is no language to chose')
 
 
 
