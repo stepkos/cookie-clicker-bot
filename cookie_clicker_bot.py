@@ -36,6 +36,7 @@ class CookieClickerBot:
     def click_cookie(self, times):
         for _ in range(times):
             self.big_cookie.click()
+            self.wait(1/60)
 
 
     def import_save(self):

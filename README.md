@@ -1,32 +1,14 @@
-# cookieClickerBot
-It's a bot to play in cookie clicker (https://orteil.dashnet.org/cookieclicker/)
+# CookieClickerBot
+There's a bot to play in cookie clicker [game](https://orteil.dashnet.org/cookieclicker/)
 
-## How to run?
-### You can use finished build!
-```
-build/
-```
+![Screen](https://github.com/stepkos/cookieClickerBot/screen.png)
 
-### Or take a look on my code!
+
+## How to run
 * Install Python
 * Install Selenium
-* Download driver (recomended "chromedriver")
-
-* Fill the data in config
-```
-config.json
-```
-
-```json
-{
-    "DRIVER_PATH": "<path to driver>",
-    "SAVE_PATH": "<path to save file>",
-    "clickBeforeSave": 1000,
-    "seriesBeforeBuy": 30
-}
-```
-
-* Run
+* Run ***cookieClickerBot.py***
+* Enjoy watching your computer play for you
 ```
 cookieClickerBot.py
 ```
@@ -36,9 +18,9 @@ cookieClickerBot.py
 * Automaticly Buy Upgrades!
 * Automaticly Buy Buildings!
 * Automaticly Export Save!
-* Automaticly Import Save when you run bot!
-* Print messeges what is happend!
-* JSON config to adjust parameters!
+* Automaticly Import Save!
+* Log messeges what's happend!
+* Outer config to adjust params
 
 ## License
 All rights reserved
