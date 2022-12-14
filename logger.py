@@ -1,18 +1,20 @@
+from enum import Enum
 from datetime import datetime
 
 
 class Logger:
     
-    class TextColors:
-        HEADER = '\033[95m'     # Purple
-        OKBLUE = '\033[94m'     # Blue
-        OKCYAN = '\033[96m'     # Cyan
-        OKGREEN = '\033[92m'    # Green
-        WARNING = '\033[93m'    # Orange
-        ERROR = '\033[91m'      # Red
-        CLASSIC = '\033[0m'     # Classic
-        BOLD = '\033[1m'        # Bold
-        UNDERLINE = '\033[4m'   # Bold and Underline
+    class TextStyle(Enum):
+        PURPLE = '\033[95m'
+        BLUE = '\033[94m'
+        CYAN = '\033[96m'
+        GREEN = '\033[92m'
+        ORANGE = '\033[93m'
+        RED = '\033[91m'
+        
+        CLASSIC = '\033[0m'
+        BOLD = '\033[1m'
+        BOLD_AND_UNDERLINE = '\033[4m'
 
 
     @staticmethod
@@ -22,39 +24,39 @@ class Logger:
 
 
     @staticmethod
-    def __log(type, message, color=TextColors.CLASSIC):
+    def __log(type, message, color=TextStyle.CLASSIC):
         print('{hour}  {color}{type:7}{color_clear} | {message}'.format(
-            color_clear=Logger.TextColors.CLASSIC,
+            color_clear=Logger.TextStyle.CLASSIC.value,
             hour=Logger.get_time(),
             message=message,
-            color=color,
+            color=color.value,
             type=type
         ))
 
 
     @staticmethod
     def info(message):
-        Logger.__log('INFO', message, Logger.TextColors.OKBLUE)
+        Logger.__log('INFO', message, Logger.TextStyle.BLUE)
 
 
     @staticmethod
     def warning(message):
-        Logger.__log('WARNING', message, Logger.TextColors.WARNING)
+        Logger.__log('WARNING', message, Logger.TextStyle.ORANGE)
 
 
     @staticmethod
     def error(message):
-        Logger.__log('ERROR', message, Logger.TextColors.ERROR)    
+        Logger.__log('ERROR', message, Logger.TextStyle.RED)    
 
 
     @staticmethod
     def success(message):
-        Logger.__log('SUCCESS', message, Logger.TextColors.OKGREEN)
+        Logger.__log('SUCCESS', message, Logger.TextStyle.GREEN)
 
 
     @staticmethod
     def debug(message):
-        Logger.__log('DEBUG', message, Logger.TextColors.HEADER)
+        Logger.__log('DEBUG', message, Logger.TextStyle.PURPLE)
     
 
     
